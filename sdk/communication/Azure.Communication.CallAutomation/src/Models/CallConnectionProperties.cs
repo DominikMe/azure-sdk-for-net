@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using CommunicationIdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary> The call connection properties. </summary>

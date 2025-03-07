@@ -10,6 +10,8 @@ using Azure.Core.Pipeline;
 using Azure.Communication.Pipeline;
 using System.Collections.Generic;
 
+using IdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary>
@@ -292,7 +294,7 @@ namespace Azure.Communication.CallAutomation
                 if (options == null)
                     throw new ArgumentNullException(nameof(options));
 
-                RedirectCallRequestInternal request = new RedirectCallRequestInternal(options.IncomingCallContext, CommunicationIdentifierSerializer.Serialize(options.CallInvite.Target));
+                RedirectCallRequestInternal request = new RedirectCallRequestInternal(options.IncomingCallContext, IdentifierSerializer.Serialize(options.CallInvite.Target));
 
                 request.CustomCallingContext = new CustomCallingContextInternal(
                    options.CallInvite.CustomCallingContext.SipHeaders == null ? new ChangeTrackingDictionary<string, string>() : options.CallInvite.CustomCallingContext.SipHeaders,
@@ -335,7 +337,7 @@ namespace Azure.Communication.CallAutomation
                 if (options == null)
                     throw new ArgumentNullException(nameof(options));
 
-                RedirectCallRequestInternal request = new RedirectCallRequestInternal(options.IncomingCallContext, CommunicationIdentifierSerializer.Serialize(options.CallInvite.Target));
+                RedirectCallRequestInternal request = new RedirectCallRequestInternal(options.IncomingCallContext, IdentifierSerializer.Serialize(options.CallInvite.Target));
 
                 request.CustomCallingContext = new CustomCallingContextInternal(
                                    options.CallInvite.CustomCallingContext.SipHeaders == null ? new ChangeTrackingDictionary<string, string>() : options.CallInvite.CustomCallingContext.SipHeaders,
@@ -717,7 +719,7 @@ namespace Azure.Communication.CallAutomation
         private CreateCallRequestInternal CreateCallRequest(CreateCallOptions options)
         {
             CreateCallRequestInternal request = new(
-                targets: new List<CommunicationIdentifierModel>() { { CommunicationIdentifierSerializer.Serialize(options.CallInvite.Target) } },
+                targets: new List<CommunicationIdentifierModel>() { { IdentifierSerializer.Serialize(options.CallInvite.Target) } },
                 callbackUri: options.CallbackUri.AbsoluteUri)
             {
                 SourceCallerIdNumber = options?.CallInvite?.SourceCallerIdNumber == null
@@ -754,7 +756,7 @@ namespace Azure.Communication.CallAutomation
         private CreateCallRequestInternal CreateCallRequest(CreateGroupCallOptions options)
         {
             CreateCallRequestInternal request = new(
-                targets: options.Targets.Select(t => CommunicationIdentifierSerializer.Serialize(t)),
+                targets: options.Targets.Select(t => IdentifierSerializer.Serialize(t)),
                 callbackUri: options.CallbackUri.AbsoluteUri)
             {
                 SourceCallerIdNumber = options?.SourceCallerIdNumber == null

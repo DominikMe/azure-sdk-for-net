@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
+using IdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary>
@@ -77,7 +79,7 @@ namespace Azure.Communication.CallAutomation
                 {
                     foreach (var c in options.AudioChannelParticipantOrdering)
                     {
-                        request.AudioChannelParticipantOrdering.Add(CommunicationIdentifierSerializer.Serialize(c));
+                        request.AudioChannelParticipantOrdering.Add(IdentifierSerializer.Serialize(c));
                     }
                 }
 
@@ -85,7 +87,7 @@ namespace Azure.Communication.CallAutomation
                 {
                     foreach (var c in options.ChannelAffinity)
                     {
-                        ChannelAffinityInternal newChannelAffinity = new ChannelAffinityInternal(CommunicationIdentifierSerializer.Serialize(c.Participant));
+                        ChannelAffinityInternal newChannelAffinity = new ChannelAffinityInternal(IdentifierSerializer.Serialize(c.Participant));
                         if (c.Channel != null)
                         {
                             newChannelAffinity.Channel = c.Channel;
@@ -148,7 +150,7 @@ namespace Azure.Communication.CallAutomation
                 {
                     foreach (var c in options.AudioChannelParticipantOrdering)
                     {
-                        request.AudioChannelParticipantOrdering.Add(CommunicationIdentifierSerializer.Serialize(c));
+                        request.AudioChannelParticipantOrdering.Add(IdentifierSerializer.Serialize(c));
                     }
                 };
 
@@ -156,7 +158,7 @@ namespace Azure.Communication.CallAutomation
                 {
                     foreach (var c in options.ChannelAffinity)
                     {
-                        ChannelAffinityInternal newChannelAffinity = new ChannelAffinityInternal(CommunicationIdentifierSerializer.Serialize(c.Participant));
+                        ChannelAffinityInternal newChannelAffinity = new ChannelAffinityInternal(IdentifierSerializer.Serialize(c.Participant));
                         if (c.Channel != null)
                         {
                             newChannelAffinity.Channel = c.Channel;

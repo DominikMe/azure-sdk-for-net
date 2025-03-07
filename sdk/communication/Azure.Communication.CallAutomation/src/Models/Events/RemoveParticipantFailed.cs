@@ -3,6 +3,8 @@
 
 using System.Text.Json;
 
+using IdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary>
@@ -21,7 +23,7 @@ namespace Azure.Communication.CallAutomation
         {
             OperationContext = internalEvent.OperationContext;
             ResultInformation = internalEvent.ResultInformation;
-            Participant = CommunicationIdentifierSerializer.Deserialize(internalEvent.Participant);
+            Participant = IdentifierSerializer.Deserialize(internalEvent.Participant);
             CallConnectionId = internalEvent.CallConnectionId;
             ServerCallId = internalEvent.ServerCallId;
             CorrelationId = internalEvent.CorrelationId;

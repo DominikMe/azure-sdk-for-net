@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using IdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary> The participant in a call. </summary>
@@ -21,7 +23,7 @@ namespace Azure.Communication.CallAutomation
         /// <param name="callParticipantInternal"> The internal call participant. </param>
         internal CallParticipant(CallParticipantInternal callParticipantInternal)
         {
-            Identifier = CommunicationIdentifierSerializer.Deserialize(callParticipantInternal.Identifier);
+            Identifier = IdentifierSerializer.Deserialize(callParticipantInternal.Identifier);
             IsMuted = (bool)callParticipantInternal.IsMuted;
             IsOnHold = callParticipantInternal.IsOnHold.GetValueOrDefault(false);
         }

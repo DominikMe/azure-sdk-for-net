@@ -3,6 +3,8 @@
 
 using System.Text.Json;
 
+using IdentifierSerializer = Azure.Communication.CommunicationIdentifierSerializer_2025_03_15_preview;
+
 namespace Azure.Communication.CallAutomation
 {
     /// <summary>
@@ -19,8 +21,8 @@ namespace Azure.Communication.CallAutomation
         /// <param name="internalEvent">Internal Representation of the IncomingCall. </param>
         internal IncomingCall(IncomingCallInternal internalEvent)
         {
-            To = CommunicationIdentifierSerializer.Deserialize(internalEvent.To);
-            From = CommunicationIdentifierSerializer.Deserialize(internalEvent.From);
+            To = IdentifierSerializer.Deserialize(internalEvent.To);
+            From = IdentifierSerializer.Deserialize(internalEvent.From);
             ServerCallId = internalEvent.ServerCallId;
             CallerDisplayName = internalEvent.CallerDisplayName;
             CustomContext = new CustomCallingContext(internalEvent.CustomContext.SipHeaders, internalEvent.CustomContext.VoipHeaders);
@@ -28,7 +30,7 @@ namespace Azure.Communication.CallAutomation
 
             if (internalEvent.OnBehalfOfCallee != null)
             {
-                OnBehalfOfCallee = CommunicationIdentifierSerializer.Deserialize(internalEvent.OnBehalfOfCallee);
+                OnBehalfOfCallee = IdentifierSerializer.Deserialize(internalEvent.OnBehalfOfCallee);
             }
 
             CorrelationId = internalEvent.CorrelationId;
